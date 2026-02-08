@@ -47,8 +47,8 @@ namespace PlayerNS {
     }
 
     Player::Player() {
-        position.first = 0; // x position
-        position.second = 0; // y position
+        position.first = 10; // x position
+        position.second = 10; // y position
     }
 
     pair<int, int> Player::getPosition() {

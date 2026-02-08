@@ -6,6 +6,8 @@
 using namespace PlayerNS;
 using namespace AppleNS;
 
+
+
 int main() {
 	// Initialize ncurses environment
 	initscr();
@@ -22,7 +24,23 @@ int main() {
 	Player player{};
 	Apple apple{};
 
+	int wallWidth = 40;
+	int wallHeight = 20;
+	char wallChar = '#';
+
+	//Draw walls
+	for (int x = 0; x < wallWidth; x++) {
+		mvaddch(0, x, wallChar); // Top wall
+		mvaddch(wallHeight - 1, x, wallChar); // Bottom wall
+	}
+	for (int y = 0; y < wallHeight; y++) {
+		mvaddch(y, 0, wallChar); // Left wall
+		mvaddch(y, wallWidth - 1, wallChar); // Right wall
+	}
+
+
 	while (true) {
+
 		// Game Code
 		int input = getch();
 
@@ -42,7 +60,13 @@ int main() {
 			case 'q': endwin(); return 0; // Quit game
 		}
 
-		erase(); // Clear the screen
+
+		// Clear the screen, ecept for walls
+		for (int y = 1; y < wallHeight - 1; y++) {
+			for (int x = 1; x < wallWidth - 1; x++) {
+				mvaddch(y, x, ' ');
+			}
+		}
 
 		player.movePlayer();
 
@@ -71,10 +95,22 @@ int main() {
 			player.incrementLength(); // Increase player length
 			apple = Apple(); // Generate new apple
 		}
-		
+
+			// Check for wall collision
+			if (playerPos.first <= 0 || playerPos.first >= wallWidth - 1 ||
+				playerPos.second <= 0 || playerPos.second >= wallHeight - 1) {
+				mvprintw(0, 0, "Game Over! You hit the wall.");
+				
+
+				refresh();
+				usleep(2000000); // Wait for 2 seconds before exiting
+				endwin();
+				return 0;
+			
+			}
 		refresh();
 
-		usleep(100000); // Sleep for 100ms to control game speed
+		usleep(150000); // Sleep for 150ms to control game speed
 
 	}
 
