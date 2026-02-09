@@ -3,6 +3,7 @@
 
 #include <deque>
 #include <utility>
+#include <ncurses.h>
 using namespace std;
 
 namespace PlayerNS {
@@ -10,7 +11,7 @@ namespace PlayerNS {
     class Player {
         pair<int, int> position;
         int length = 2;
-        char playerChar = '@';
+        chtype playerChar = '@'; // default player character
 
         int moveDirection = 0; // default move direction is right
 

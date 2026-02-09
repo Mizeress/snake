@@ -24,6 +24,15 @@ int main() {
 	Player player{};
 	Apple apple{};
 
+	start_color(); // Enable color functionality
+
+	#define SNAKE_PAIR 1
+	#define APPLE_PAIR 2
+	init_pair(SNAKE_PAIR, COLOR_GREEN, COLOR_BLACK); // Player color
+	init_pair(APPLE_PAIR, COLOR_RED, COLOR_BLACK); // Apple color
+
+	
+
 	int wallWidth = 40;
 	int wallHeight = 20;
 	char wallChar = '#';
@@ -72,6 +81,7 @@ int main() {
 
 		pair<int, int> playerPos = player.getPosition();
 		//draw head
+		attron(COLOR_PAIR(SNAKE_PAIR)); // Set color for player
 		mvaddch(playerPos.second, playerPos.first, player.getPlayerChar());
 
 		// Draw player body segments && Check for intersection with player head
@@ -87,8 +97,12 @@ int main() {
 			}
 		}
 
+		attroff(COLOR_PAIR(SNAKE_PAIR)); // Turn off player color
+
 		// Draw apple
+		attron(COLOR_PAIR(APPLE_PAIR)); // Set color for apple
 		mvaddch(apple.getPosition().second, apple.getPosition().first, apple.getAppleChar());
+		attroff(COLOR_PAIR(APPLE_PAIR)); // Turn off apple color
 
 		// Check for apple collision
 		if (playerPos == apple.getPosition()) {
