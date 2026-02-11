@@ -6,9 +6,12 @@
 using namespace PlayerNS;
 using namespace AppleNS;
 
-
+#include <audioHandler.hpp>
 
 int main() {
+	// Initialize audio
+	initAudio();
+
 	// Initialize ncurses environment
 	initscr();
 
@@ -108,6 +111,7 @@ int main() {
 		if (playerPos == apple.getPosition()) {
 			player.incrementLength(); // Increase player length
 			apple = Apple(); // Generate new apple
+			playEatSound();
 		}
 
 			// Check for wall collision
@@ -129,6 +133,9 @@ int main() {
 	}
 
 	endwin(); // End ncurses mode
+
+	//Audio Cleanup
+	cleanupAudio();
 
 	return 0;
 
