@@ -7,7 +7,8 @@ ma_sound eatSound;
 ma_sound deathSound;
 ma_sound backgroundMusic;
 
-const string songPath = "sound/";
+//Switch to sound/ for local build and /usr/share/snake for docker deploy
+const string songPath = "/usr/share/snake/";
 
 void initAudio() {
     ma_engine_init(NULL, &engine);
