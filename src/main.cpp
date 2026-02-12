@@ -11,6 +11,7 @@ using namespace AppleNS;
 int main() {
 	// Initialize audio
 	initAudio();
+	playBackgroundMusic();
 
 	// Initialize ncurses environment
 	initscr();
@@ -92,6 +93,7 @@ int main() {
 			pair<int, int> segment = player.getBody()[i];
 			mvaddch(segment.second, segment.first, player.getPlayerChar());
 			if (segment == playerPos) {
+				playDeathSound();
 				mvprintw(0, 0, "Game Over! You collided with yourself.");
 				refresh();
 				usleep(2000000); // Wait for 2 seconds before exiting
@@ -119,6 +121,7 @@ int main() {
 				playerPos.second <= 0 || playerPos.second >= wallHeight - 1) {
 				mvprintw(0, 0, "Game Over! You hit the wall.");
 				
+				playDeathSound();
 
 				refresh();
 				usleep(2000000); // Wait for 2 seconds before exiting
