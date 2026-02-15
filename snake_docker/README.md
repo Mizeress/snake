@@ -1,5 +1,5 @@
 # Snake Docker
-##User Instructions
+## User Instructions
 
 Run with docker run -it --device /dev/snd -v /run/user/$(id -u)/pipewire-0:/tmp/pipewire-0 -e PIPEWIRE_RUNTIME_DIR=/tmp -e XDG_RUNTIME_DIR=/tmp --group-add $(getent group audio | cut -d: -f3) <imagename>
 `-it` grants an interactive terminal
@@ -10,7 +10,7 @@ Run with docker run -it --device /dev/snd -v /run/user/$(id -u)/pipewire-0:/tmp/
 `--group-add $(getent group audio | cut -d: -f3)` Adds the container to the host's audio group to ensure it has proper permissions
 If a container already exists, `docker start -i <container_name>`
 
-##Troubleshooting
+## Troubleshooting
 
 - Check Docker Logs and read messages
 
