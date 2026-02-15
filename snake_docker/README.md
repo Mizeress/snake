@@ -1,14 +1,14 @@
 # Snake Docker
 ## User Instructions
 
-Run with docker run -it --device /dev/snd -v /run/user/$(id -u)/pipewire-0:/tmp/pipewire-0 -e PIPEWIRE_RUNTIME_DIR=/tmp -e XDG_RUNTIME_DIR=/tmp --group-add $(getent group audio | cut -d: -f3) <imagename>
-`-it` grants an interactive terminal
-`--device` /dev/snd grants the container access to your hosts sound cards
-`-v /run/user/$(id -u)/pipewire-0:/tmp/pipewire-0` Mounts your host's PipeWire socekt into the container
-`-e PIPEWIRE_RUNTIME_DIR=/tmp` Sets an environment variable to tell PipeWire to look for the socket in /tmp
-`-e XDG_RUNTIME_DIR=/tmp` Sets standard Linux runtime directory to /tmp to ensure it uses that directory to store runtime files such as sockets
-`--group-add $(getent group audio | cut -d: -f3)` Adds the container to the host's audio group to ensure it has proper permissions
-If a container already exists, `docker start -i <container_name>`
+- Run with docker run -it --device /dev/snd -v /run/user/$(id -u)/pipewire-0:/tmp/pipewire-0 -e PIPEWIRE_RUNTIME_DIR=/tmp -e XDG_RUNTIME_DIR=/tmp --group-add $(getent group audio | cut -d: -f3) <imagename>
+  - `-it` grants an interactive terminal
+  - `--device` /dev/snd grants the container access to your hosts sound cards
+  - `-v /run/user/$(id -u)/pipewire-0:/tmp/pipewire-0` Mounts your host's PipeWire socekt into the container
+  - `-e PIPEWIRE_RUNTIME_DIR=/tmp` Sets an environment variable to tell PipeWire to look for the socket in /tmp
+  - `-e XDG_RUNTIME_DIR=/tmp` Sets standard Linux runtime directory to /tmp to ensure it uses that directory to store runtime files such as sockets
+  - `--group-add $(getent group audio | cut -d: -f3)` Adds the container to the host's audio group to ensure it has proper permissions
+- If a container already exists, `docker start -i <container_name>`
 
 ## Troubleshooting
 
