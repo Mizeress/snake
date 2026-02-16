@@ -9,6 +9,9 @@
   - `-e XDG_RUNTIME_DIR=/tmp` Sets standard Linux runtime directory to /tmp to ensure it uses that directory to store runtime files such as sockets
   - `--group-add $(getent group audio | cut -d: -f3)` Adds the container to the host's audio group to ensure it has proper permissions
 - If a container already exists, `docker start -i <container_name>`
+- If you're using WSL:
+    - `docker run -it --device /dev/snd -v /mnt/wslg/:/mnt/wslg/ -e PULSE_SERVER= /mnt/wslg/PulseServer <imagename>`
+
 
 ## Troubleshooting
 
